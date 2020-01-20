@@ -70,7 +70,9 @@ function App() {
   if (error) {
     errorComponents = <Error msg="Campos obligatorios" />
   } else if(result.cod === "404"){
-    errorComponents = <Error msg="No se encuentra la Ciudad" />  
+    errorComponents = <Error msg="No se encuentra la Ciudad" />
+    
+    
   }else {
     errorComponents = <Weather result = {result}/>;
   }

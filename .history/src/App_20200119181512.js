@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import FormComponents from './components/FormComponents';
-import { GLOBAL } from './config/constats';
 
 import Error from './components/Error'
-import Weather from './components/Weather';
 
 
 function App() {
@@ -18,37 +16,14 @@ function App() {
 
   const [error, setError] = useState(false);
 
-  const [result, setResult] = useState({});
-
-  useEffect(() => {
-
-    const consultarAPI = async() => {
-
-
-      const reque =`${GLOBAL.url}?q=${city},${country}&appid=${GLOBAL.apiKey}`;
-  
-      const response = await fetch(reque);
-      const result = await response.json();
-  
-      console.log(result);
-
-      setResult(result);
-      
-    
-    }
-
-    if(city === '') return;
-    consultarAPI()
-  }, [city, country])
-
   const datosConsulta = datos => {
     console.log(datos);
 
     //Validad datos
-    if (datos.city === '' || datos.country === '') {
+
+    if (datos.ciudad === '' || datos.country === '') {
 
       setError(true);
-
       return;
     }
 
@@ -60,19 +35,15 @@ function App() {
 
   }
 
-
-
   // Cargar componente condicional
-
 
   let errorComponents;
 
   if (error) {
     errorComponents = <Error msg="Campos obligatorios" />
-  } else if(result.cod === "404"){
-    errorComponents = <Error msg="No se encuentra la Ciudad" />  
-  }else {
-    errorComponents = <Weather result = {result}/>;
+  } else {
+
+    errorComponents = null;
   }
 
   return (

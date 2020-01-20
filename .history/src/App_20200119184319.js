@@ -4,7 +4,6 @@ import FormComponents from './components/FormComponents';
 import { GLOBAL } from './config/constats';
 
 import Error from './components/Error'
-import Weather from './components/Weather';
 
 
 function App() {
@@ -69,10 +68,8 @@ function App() {
 
   if (error) {
     errorComponents = <Error msg="Campos obligatorios" />
-  } else if(result.cod === "404"){
-    errorComponents = <Error msg="No se encuentra la Ciudad" />  
-  }else {
-    errorComponents = <Weather result = {result}/>;
+  } else {
+    errorComponents = null;
   }
 
   return (
